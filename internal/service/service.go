@@ -9,16 +9,16 @@ import (
 )
 
 type LinkService struct {
-	repo LinkRepository
+	repo MemoryLinkRepository
 }
 
-func NewLinkService(repo LinkRepository) *LinkService {
+func NewLinkService(repo MemoryLinkRepository) *LinkService {
 	return &LinkService{
 		repo: repo,
 	}
 }
 
-type LinkRepository interface {
+type MemoryLinkRepository interface {
 	Create(link *model.Link) error
 	GetByHash(string) (string, error)
 }

@@ -7,17 +7,17 @@ import (
 	"github.com/kudr9vsev/shortener/internal/model"
 )
 
-type LinkRepository struct {
+type PostgresLinkRepository struct {
 	db *sql.DB
 }
 
-func NewLinkRepository(db *sql.DB) *LinkRepository {
-	return &LinkRepository{
+func NewLinkRepository(db *sql.DB) *PostgresLinkRepository {
+	return &PostgresLinkRepository{
 		db: db,
 	}
 }
 
-func (r *LinkRepository) Create(link *model.Link) error {
+func (r *PostgresLinkRepository) Create(link *model.Link) error {
 	query := `INSERT INTO links (url, hash, created_at) VALUES ($1, $2, $3) RETURNING id`
 	err := r.db.QueryRow(
 		query,
@@ -28,7 +28,7 @@ func (r *LinkRepository) Create(link *model.Link) error {
 	return err
 }
 
-func (r *LinkRepository) GetByHash(hash string) (string, error) {
+func (r *PostgresLinkRepository) GetByHash(hash string) (string, error) {
 	query := `SELECT url FROM links WHERE hash = $1`
 
 	var OriginalUrl string
