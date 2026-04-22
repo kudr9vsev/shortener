@@ -48,7 +48,7 @@ func (h *LinkHandler) CreateLink(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	shortUrl := r.Host + "/" + link.Hash
+	shortUrl := "http://" + r.Host + "/" + link.Hash
 
 	w.WriteHeader(http.StatusCreated)
 
