@@ -36,7 +36,7 @@ func main() {
 	mux.HandleFunc("POST /", linkHandler.CreateLink)
 	mux.HandleFunc("GET /{id}", linkHandler.GetLink)
 
-	err = http.ListenAndServe(":8088", mux)
+	err = http.ListenAndServe(":8080", mux)
 	if err != nil {
 		panic(err)
 	}
